@@ -1,3 +1,2 @@
 # nodejscourse
-this is line 2
-this is line 3
+This is public repository of nodeJS course in itomych. Enjoy.
