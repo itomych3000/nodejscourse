@@ -4,7 +4,7 @@ const program = readline.createInterface({
    output: process.stdout
  })
 
-console.log("To exit press 'Ctrl + C'")
+console.log("-------- To exit press 'Ctrl + C' --------")
 program.setPrompt("Please type 2-digits: (10-99) ")
 program.prompt()
 program.on("line", (input) => {
@@ -19,5 +19,5 @@ program.on("line", (input) => {
    }
    program.prompt()
 }).on("close", () => {
-   console.log("\nBye Bye");
- });
+   console.log("\n-------- Bye Bye --------");
+ })
