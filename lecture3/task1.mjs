@@ -1,4 +1,4 @@
-import readline, { Interface } from "readline"
+import readline from "readline"
 const program = readline.createInterface({
    input: process.stdin,
    output: process.stdout
@@ -18,6 +18,6 @@ program.on("line", (input) => {
          break;
    }
    program.prompt()
-}).on('close', () => {
-   console.log('\nBye Bye');
+}).on("close", () => {
+   console.log("\nBye Bye");
  });
