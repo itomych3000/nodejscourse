@@ -9,12 +9,11 @@ const program = readline.createInterface({
  program.prompt()
 
  program.on("line", (input) => {
-   try {
       let splits = input.split("+", 2)
-      const isRoman = /^M{0,2}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/
+      const isRoman = /^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/
+      let arabicValues = []
 
       if (isRoman.test(splits[0]) && isRoman.test(splits[1])) {
-      
          Object.values(splits).forEach((value) => {
             const translate = new Map()
             translate.set("I", 1).set("V", 5).set("X", 10).set("L", 50).set("C", 100).set("D", 500).set("M", 1000)
@@ -27,37 +26,19 @@ const program = readline.createInterface({
                   output += translate.get(value[letter])
                   }
             }
-            console.log(output)
-            return output
-         })   
+            arabicValues.push(output)
+         })
+         let result = arabicValues.reduce((sum, current) => sum + current, 0)
+         const thousands = ["", "M", "MM", "MMM", "MMMM"]
+         const hundreds = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
+         const tens = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
+         const ones = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
+         let Roman = thousands[Math.floor(result/1000)] + hundreds[Math.floor((result%1000)/100)] + tens[Math.floor((result%100)/10)] + ones[result%10]
+         console.log(`I speak Roman: ${Roman}\n`)  
       } else {
       console.log("Invalid input!\n")
       }
-   program.prompt()
-   } catch (error) {
-      console.log("Invalid input!\n", error)
       program.prompt()
-   }
 }).on("close", () => { 
    console.log("\n-------- Bye Bye --------")
 })
-
-//Object.entries(splits).forEach(([key ,value]) => {}
-   
-
- //  let value = Number(input.trim())
-// //  //  let isInRange = 0 < value && value <= 2000
-// //    if (isNumber && isInRange) {
-// //       const thousands = ["", "M", "MM"]
-// //       const hundreds = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
-// //       const tens = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
-// //       const ones = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
-// //       let Roman = thousands[Math.floor(value/1000)] + hundreds[Math.floor((value%1000)/100)] + tens[Math.floor((value%100)/10)] + ones[value%10]
-// //       console.log(`I speak Roman: ${Roman}`)
-// //    } else {
-// //       console.log("Invalid input!\n")
-// //    }
-//    program.prompt()
-//  }).on("close", () => {
-//    console.log("\n-------- Bye Bye --------");
-//  });
